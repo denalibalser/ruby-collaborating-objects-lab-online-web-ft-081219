@@ -18,25 +18,14 @@ class Artist
     @@all
   end
 
-  def self.find_or_create_by_name(name)
-    if self.find(name)
-      self.find(name)
+  def self.find_or_create_by_name(artist_name)
+    if self.all.find{|artist_obj| artist_obj.name == artist_name}
+      self.all.find{|artist_obj| artist_obj.name == artist_name}
     else
-      self.create(name)
+      self.new(artist_name)
     end
-  end
+  end 
 
-  def self.find(name)
-    @@all.find do |artist|
-      artist.name == name
-    end
-  end
-
-  def self.create(name)
-    artist = self.new(name)
-    @@all << artist
-    artist
-  end
 
   def save
     @@all << self
